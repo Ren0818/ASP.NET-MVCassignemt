@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ass3dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cars">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Company" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="companies" Relationship="Self.FK_cars_companies" FromRole="cars" ToRole="companies" />
+  </EntityType>
+  <EntityType Name="companies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="cars" Relationship="Self.FK_cars_companies" FromRole="companies" ToRole="cars" />
+  </EntityType>
+  <Association Name="FK_cars_companies">
+    <End Role="companies" Type="Self.companies" Multiplicity="0..1" />
+    <End Role="cars" Type="Self.cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="companies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="cars">
+        <PropertyRef Name="Company" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ass3dbEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cars" EntityType="Self.cars" />
+    <EntitySet Name="companies" EntityType="Self.companies" />
+    <AssociationSet Name="FK_cars_companies" Association="Self.FK_cars_companies">
+      <End Role="companies" EntitySet="companies" />
+      <End Role="cars" EntitySet="cars" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

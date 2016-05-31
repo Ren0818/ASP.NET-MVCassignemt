@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ass3dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cars">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarMode" Type="varchar" MaxLength="50" />
+    <Property Name="Company" Type="int" />
+    <Property Name="Price" Type="money" />
+  </EntityType>
+  <EntityType Name="companies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Company" Type="varchar" MaxLength="50" />
+    <Property Name="Country" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_cars_companies">
+    <End Role="companies" Type="Self.companies" Multiplicity="0..1" />
+    <End Role="cars" Type="Self.cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="companies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="cars">
+        <PropertyRef Name="Company" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ass3dbModelStoreContainer">
+    <EntitySet Name="cars" EntityType="Self.cars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="companies" EntityType="Self.companies" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_cars_companies" Association="Self.FK_cars_companies">
+      <End Role="companies" EntitySet="companies" />
+      <End Role="cars" EntitySet="cars" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

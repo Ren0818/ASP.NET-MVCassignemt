@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ass3dbModelStoreContainer" CdmEntityContainer="ass3dbEntities1">
+    <EntitySetMapping Name="cars">
+      <EntityTypeMapping TypeName="ass3dbModel.cars">
+        <MappingFragment StoreEntitySet="cars">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CarMode" ColumnName="CarMode" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="companies">
+      <EntityTypeMapping TypeName="ass3dbModel.companies">
+        <MappingFragment StoreEntitySet="companies">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

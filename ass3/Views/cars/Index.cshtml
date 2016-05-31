@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ass3.Models.cars>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    @using(Html.BeginForm("Index","cars",FormMethod.Get))
+    {
+<b>Search By:</b> 
+    @Html.RadioButton("searchBy","CarMode", true) <text>CarMode</text>
+
+    @Html.TextBox("search")
+    
+        <input type="submit" value="Search"/>
+    }
+</p>
+<table class="table" id="carlist">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CarMode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.companies.Company)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarMode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.companies.Company)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<style>
+    .silver {
+        background-color: silver;
+    }
+
+    tr.dataHover {
+        background-color:#242424;
+    }
+</style>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#carlist tbody tr:even').addClass("silver");
+        $('#carlist tbody tr').mouseover(function () {
+            $(this).addClass('dataHover');
+        });
+        $('#carlist tbody tr').mouseout(function () {
+            $(this).removeClass('dataHover');
+        });
+    });
+</script>
